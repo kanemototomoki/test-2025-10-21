@@ -1,9 +1,12 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { neon } from '@neondatabase/serverless'
 import process from "node:process";
 import console from 'node:console';
 
 const app = new Hono().basePath('/api')
+
+app.use('*', cors())
 
 // 環境変数チェック
 if (!process.env.DATABASE_URL) {
