@@ -2,14 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider, SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,9 +28,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="ja">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <header className="flex justify-end items-center p-4 gap-4 h-16">
             <SignedOut>
               <SignInButton />
@@ -50,7 +42,20 @@ export default function RootLayout({
               <UserButton />
             </SignedIn>
           </header>
-          {children}
+          <div className="drawer drawer-open">
+            <input type="checkbox" className="drawer-toggle" />
+            <div className="drawer-content">{children}</div>
+            <div className="drawer-side">
+              <ul className="menu bg-base-200 min-h-full w-80 p-4">
+                <li>
+                  <Link href="">Sidebar Item 1</Link>
+                </li>
+                <li>
+                  <Link href="">Sidebar Item 2</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </body>
       </html>
     </ClerkProvider>
