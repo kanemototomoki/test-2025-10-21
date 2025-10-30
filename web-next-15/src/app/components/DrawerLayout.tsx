@@ -41,7 +41,7 @@ export default function DrawerLayout({
         checked={isOpen}
         onChange={handleToggle}
       />
-      <div className="drawer-content">
+      <div className="drawer-content grid grid-rows-[max-content_auto]">
         <Header theme={theme} onThemeToggle={handleThemeToggle} />
         {children}
       </div>
@@ -57,7 +57,7 @@ export default function DrawerLayout({
             {/* list item */}
             <li>
               <button
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex"
                 data-tip="Homepage"
               >
                 <svg
@@ -73,14 +73,14 @@ export default function DrawerLayout({
                   <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
                   <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 </svg>
-                <span className="is-drawer-close:hidden">Homepage</span>
+                <span className="drawer-text-transition">Homepage</span>
               </button>
             </li>
 
             {/* list item */}
             <li>
               <button
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex"
                 data-tip="Settings"
               >
                 <svg
@@ -98,7 +98,7 @@ export default function DrawerLayout({
                   <circle cx="17" cy="17" r="3"></circle>
                   <circle cx="7" cy="7" r="3"></circle>
                 </svg>
-                <span className="is-drawer-close:hidden">Settings</span>
+                <span className="drawer-text-transition">Settings</span>
               </button>
             </li>
           </ul>
