@@ -2,15 +2,19 @@
 
 import { useState, useCallback } from 'react'
 import Cookies from 'js-cookie'
+import Header from './Header'
 
 export default function DrawerLayout({
   children,
   defaultOpen = true,
+  defaultTheme = 'light',
 }: {
   children: React.ReactNode
   defaultOpen?: boolean
+  defaultTheme?: string
 }) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
+  const [theme, setTheme] = useState(defaultTheme)
 
   const handleToggle = useCallback(() => {
     setIsOpen((prev) => {
@@ -20,8 +24,16 @@ export default function DrawerLayout({
     })
   }, [])
 
+  const handleThemeToggle = useCallback(() => {
+    setTheme((prev) => {
+      const newTheme = prev === 'light' ? 'dark' : 'light'
+      Cookies.set('theme', newTheme, { expires: 365 })
+      return newTheme
+    })
+  }, [])
+
   return (
-    <div className="drawer drawer-open">
+    <div className="drawer drawer-open" data-theme={theme}>
       <input
         id="my-drawer-4"
         type="checkbox"
@@ -29,16 +41,19 @@ export default function DrawerLayout({
         checked={isOpen}
         onChange={handleToggle}
       />
-      <div className="drawer-content">{children}</div>
+      <div className="drawer-content">
+        <Header theme={theme} onThemeToggle={handleThemeToggle} />
+        {children}
+      </div>
       <div className="drawer-side is-drawer-close:overflow-visible">
         <label
           htmlFor="my-drawer-4"
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="is-drawer-close:w-14 is-drawer-open:w-64 bg-base-200 flex flex-col items-start min-h-full">
+        <div className="is-drawer-close:w-14 is-drawer-open:w-64 bg-base-200 text-base-content flex flex-col items-start min-h-full">
           {/* Sidebar content here */}
-          <ul className="menu w-full grow">
+          <ul className="menu w-full grow text-base-content">
             {/* list item */}
             <li>
               <button
