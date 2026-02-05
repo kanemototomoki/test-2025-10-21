@@ -1,6 +1,14 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(npm view:*)",
+      "Bash(pnpm update:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:developers.cloudflare.com)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "context7"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }
